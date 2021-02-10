@@ -56,6 +56,7 @@ char* str_slice(char* slice, int start, int stop, int step) {
      * @param start: where to start slicing 
      * @param stop: where to stop slicing
      * @param step: how far to increment each step
+     * @returns: the newly created string.
     */ 
     
     // Allocate a new string that will be sized down after.
@@ -79,7 +80,8 @@ int str_count(char* check, char* count) {
      * Count the number of occurrances of count in the string.
      * @param check: the string to count in
      * @param count: the string to count
-    */ 
+     * @returns: the number of occurances.
+    */
 
     int occurrances = 0;
     int increment = str_len(count);
@@ -93,7 +95,11 @@ int str_count(char* check, char* count) {
             return occurrances;
         }
 
-        printf("Slice: %s\n", str_slice(check, start_index, end_index, 1));
+        char* new_slice = str_slice(check, start_index, end_index, 1);
+
+        if (str_cmp(new_slice, count) == 1) {
+            occurrances += 1;
+        }
     }
 
     return occurrances;
@@ -110,11 +116,10 @@ char* str_repl(char* str, char* sub, char* repl) {
 
     int repl_len = str_len(repl);
     int index = 0;
-    int occurances = 0;
     char* new_string = malloc(str_len(str));
     
     // Determine how many occurances of sub appears in the string.
-    int occurrances = str_count(str, sub);
+    int sub_occurrances = str_count(str, sub);
 
     return new_string;
 }
